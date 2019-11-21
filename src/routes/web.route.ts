@@ -6,8 +6,8 @@ export class WebRoute extends BaseRoute implements IBaseRoute {
         this.express.route('/').get(this.homeController.getHomePage.bind(this));
         this.express.route('/categories').get(this.homeController.getCategoriesPage.bind(this));
         this.express.route('/categories/:categoryName').get(this.homeController.getCategoryPage.bind(this));
-        this.express.route('/:productName').get(this.homeController.getProductPage.bind(this));
-        this.express.route('/:productName').get(this.homeController.getProductPage.bind(this));
+        this.express.route('/product/:productName').get(this.homeController.getProductPage.bind(this));
+        this.express.route('/product/:productName').get(this.homeController.getProductPage.bind(this));
         this.express.route('/wishlist').get(this.homeController.getWishlistPage.bind(this));
         this.express.route('/cart').get(this.homeController.getCartPage.bind(this));
         this.express.route('/compare').get(this.homeController.getComparePage.bind(this));
@@ -17,6 +17,8 @@ export class WebRoute extends BaseRoute implements IBaseRoute {
         this.express.route('/registration').get(this.homeController.getRegistrationPage.bind(this));
         this.express.route('/contact').get(this.homeController.getContactPage.bind(this));
         this.express.route('/404').get(this.homeController.get404Page.bind(this));
+
+        this.express.route('/admin').get(this.homeController.getAdminPage.bind(this));
 
         return this;
     }

@@ -29,13 +29,17 @@ const SeriesSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    items: {
+        type: Number,
+        default: 0,
+    },
     manufacturer: {
         type: Schema.Types.ObjectId,
         ref: 'Manufacturer',
     },
     category: {
         type: Schema.Types.ObjectId,
-        ref: 'Category'
+        ref: 'Category',
     },
     timestamp: {
         type: Date,

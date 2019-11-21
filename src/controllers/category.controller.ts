@@ -2,7 +2,8 @@ import { BaseController } from "../core/base.controller";
 import { IBaseController } from "../core/IBase.controller";
 import { Request, Response } from "express";
 import { Category } from "../models/category.model";
-import {Manufacturer} from "../models/manufacturer.model";
+import { Manufacturer } from "../models/manufacturer.model";
+import { Series } from "../models/series.model";
 
 export class CategoryController extends BaseController implements IBaseController {
     public index(req: Request, res: Response): Response | Promise<Response> | void {}
@@ -25,8 +26,9 @@ export class CategoryController extends BaseController implements IBaseControlle
         await newCategory.save();
         res.status(200).send({
             _id: newCategory._id,
-            slug,
-            content,
+            name: newCategory.get('name'),
+            slug: newCategory.get('slug'),
+            content: newCategory.get('content'),
             status: newCategory.get('status'),
             trash: newCategory.get('trash'),
             views: newCategory.get('views'),
@@ -45,8 +47,9 @@ export class CategoryController extends BaseController implements IBaseControlle
         await newManufacturer.save();
         res.status(200).send({
             _id: newManufacturer._id,
-            slug,
-            content,
+            name: newManufacturer.get('name'),
+            slug: newManufacturer.get('slug'),
+            content: newManufacturer.get('content'),
             status: newManufacturer.get('status'),
             trash: newManufacturer.get('trash'),
             views: newManufacturer.get('views'),
@@ -54,6 +57,32 @@ export class CategoryController extends BaseController implements IBaseControlle
         });
     }
     public async createSeries(req: Request, res: Response): Promise<Response | void> {
+        const { name, slug, content, manufacturerId, categoryId } = req.body;
+        // Validate Request Body
+        // Check For Existence Manufacturer & Category If Appends
+        const category = await Category.findById(categoryId).exec();
+        const manufacturer = await Manufacturer.findById(manufacturerId).exec();
+        console.log(category, manufacturer);
+        const newSeries = new Series({
+            name,
+            slug,
+            content,
+            category: category._id,
+            manufacturer: manufacturer._id,
+        });
+        await newSeries.save();
+        res.status(200).send({
+            _id: newSeries._id,
+            name: newSeries.get('name'),
+            slug: newSeries.get('slug'),
+            content: newSeries.get('content'),
+            views: newSeries.get('views'),
+            trash: newSeries.get('trash'),
+            items: newSeries.get('items'),
+            manufacturer: newSeries.get('manufacturer'),
+            category: newSeries.get('category'),
+            timestamp: newSeries.get('timestamp')
+        });
     }
     public async appendManufacturerToCategory(req: Request, res: Response): Promise<Response | void> {
         const categoryId = req.body.categoryId;
@@ -75,6 +104,11 @@ export class CategoryController extends BaseController implements IBaseControlle
     }
     public async appendSeriesToManufacturer(req: Request, res: Response): Promise<Response | void> {}
     public async appendSeriesToCategory(req: Request, res: Response): Promise<Response | void> {}
+    public async getCategoryList(req: Request, res: Response): Promise<Response | void> {
+        res.status(200).send(
+            await Category.find({}).exec()
+        );
+    }
     public async getManufacturerListByCategory(req: Request, res: Response): Promise<Response | void> {
         const categoryId = req.params.categoryId;
         const manufacturers = await Manufacturer.find({category_list: categoryId});

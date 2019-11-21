@@ -9,6 +9,7 @@ export class ApiRoute extends BaseRoute implements IBaseRoute {
         this.express.route('/admin/category/append/mtc').post(this.categoryController.appendManufacturerToCategory.bind(this));
         this.express.route('/admin/category/append/stm').post(this.categoryController.appendSeriesToManufacturer.bind(this));
         this.express.route('/admin/category/append/stc').post(this.categoryController.appendSeriesToCategory.bind(this));
+        this.express.route('/admin/category/get').get(this.categoryController.getCategoryList.bind(this));
         this.express.route('/admin/category/get/manufacturer/:categoryId').get(this.categoryController.getManufacturerListByCategory.bind(this));
         this.express.route('/admin/category/get/category/:manufacturerId').get(this.categoryController.getManufacturerCategoryList.bind(this));
 

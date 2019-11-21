@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel='icon' href='assets/images/favicon.ico' type='image/x-icon'>
+    <title>Admin Panel | Maroni</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style/style.css">
+</head>
+<body>
+    <application>
+        <side-bar>
+            <ul id="sidebar-routes">
+                <li><label>Categories</label></li>
+                <li><label>Manufacturers</label></li>
+                <li><label>Series</label></li>
+            </ul>
+        </side-bar>
+        <app-content>
+            <navigation></navigation>
+            <app-wrapper>
+                <section id="categories-section">
+                    <label>Categories</label>
+                    <card>
+                        <admin-table-toolbar>
+                            <button>+</button>
+                            <button disabled>edt</button>
+                            <button disabled>x</button>
+                            <button>ref</button>
+                        </admin-table-toolbar>
+                        <admin-table>
+                            <admin-table-header>
+                                <label>#</label>
+                                <label>Name</label>
+                                <label>SLUG</label>
+                                <label>Content</label>
+                                <label>Views</label>
+                                <label>Created At</label>
+                                <label>Status</label>
+                                <label>Trash</label>
+                            </admin-table-header>
+                            <admin-table-body id="categories-table-body">
+                                <admin-table-row>
+                                    <label>#</label>
+                                    <label>Name</label>
+                                    <label>SLUG</label>
+                                    <label>Content</label>
+                                    <label>Views</label>
+                                    <label>Created At</label>
+                                    <label>Status</label>
+                                    <label>Trash</label>
+                                </admin-table-row>
+                                <admin-table-row>
+                                    <label>#</label>
+                                    <label>Name</label>
+                                    <label>SLUG</label>
+                                    <label>Content</label>
+                                    <label>Views</label>
+                                    <label>Created At</label>
+                                    <label>Status</label>
+                                    <label>Trash</label>
+                                </admin-table-row>
+                            </admin-table-body>
+                        </admin-table>
+                    </card>
+                </section>
+                <section id="manufacturer-section"></section>
+                <section id="series-section"></section>
+            </app-wrapper>
+        </app-content>
+    </application>
+
+    <!--  CDN  -->
+    <script src="assets/script/http.js"></script>
+    <script src="assets/script/script.js"></script>
+</body>
+</html>
