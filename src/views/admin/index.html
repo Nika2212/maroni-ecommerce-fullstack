@@ -5,6 +5,7 @@
     <link rel='icon' href='assets/images/favicon.ico' type='image/x-icon'>
     <title>Admin Panel | Maroni</title>
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/style/style.css">
 </head>
 <body>
@@ -23,10 +24,10 @@
                     <label>Categories</label>
                     <card>
                         <admin-table-toolbar>
-                            <button>+</button>
-                            <button disabled>edt</button>
-                            <button disabled>x</button>
-                            <button>ref</button>
+                            <button id="categories-add">add</button>
+                            <button id="categories-edit" disabled>edt</button>
+                            <button id="categories-remove" disabled>del</button>
+                            <button id="categories-refresh">ref</button>
                         </admin-table-toolbar>
                         <admin-table>
                             <admin-table-header>
@@ -40,26 +41,7 @@
                                 <label>Trash</label>
                             </admin-table-header>
                             <admin-table-body id="categories-table-body">
-                                <admin-table-row>
-                                    <label>#</label>
-                                    <label>Name</label>
-                                    <label>SLUG</label>
-                                    <label>Content</label>
-                                    <label>Views</label>
-                                    <label>Created At</label>
-                                    <label>Status</label>
-                                    <label>Trash</label>
-                                </admin-table-row>
-                                <admin-table-row>
-                                    <label>#</label>
-                                    <label>Name</label>
-                                    <label>SLUG</label>
-                                    <label>Content</label>
-                                    <label>Views</label>
-                                    <label>Created At</label>
-                                    <label>Status</label>
-                                    <label>Trash</label>
-                                </admin-table-row>
+                                <!-- TABLE DATA LOOP -->
                             </admin-table-body>
                         </admin-table>
                     </card>

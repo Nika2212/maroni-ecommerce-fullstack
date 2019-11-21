@@ -22,7 +22,7 @@ application {
 application side-bar {
     padding-top: 60px;
 
-    width: 320px;
+    width: 240px;
     height: 100%;
 
     display: flex;
@@ -74,7 +74,7 @@ application side-bar ul li label {
     cursor: pointer;
 }
 application app-content {
-    width: calc(100% - 320px);
+    width: calc(100% - 240px);
     height: 100%;
 
     display: flex;
@@ -340,9 +340,7 @@ card admin-table admin-table-body admin-table-row label:nth-child(7) {
     width: 90px;
 }
 card admin-table admin-table-body admin-table-row label:nth-child(8) {
-    width: 60px;
-
-    flex-shrink: 1;
+    width: 73px;
 
     border-right: none;
 }
