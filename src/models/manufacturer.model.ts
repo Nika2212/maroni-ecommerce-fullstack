@@ -33,6 +33,9 @@ const ManufacturerSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Category'
     }],
+    logo_url: {
+        type: String
+    },
     timestamp: {
         type: Date,
         default: Date.now

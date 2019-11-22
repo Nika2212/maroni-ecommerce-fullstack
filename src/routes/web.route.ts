@@ -18,8 +18,6 @@ export class WebRoute extends BaseRoute implements IBaseRoute {
         this.express.route('/contact').get(this.homeController.getContactPage.bind(this));
         this.express.route('/404').get(this.homeController.get404Page.bind(this));
 
-        this.express.route('/admin').get(this.homeController.getAdminPage.bind(this));
-
         return this;
     }
 }

@@ -12,7 +12,7 @@ export class HomeController extends BaseController implements IBaseController {
     public destroy(req: Request, res: Response): Response | Promise<Response> | void {}
 
     public getHomePage(req: Request, res: Response): Response | Promise<Response> | void {
-        res.status(200).send('Home Page');
+        res.status(200).render('temp/seeder');
     }
     public getCategoriesPage(req: Request, res: Response): Response | Promise<Response> | void {
         res.status(200).send('Categories Page');
