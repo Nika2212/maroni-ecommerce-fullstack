@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        select, select option {
+            text-transform: capitalize;
+        }
+        select#product-series, select#product-series option {
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <h1>Create Product</h1>
+
+                    <hr>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="product-name">Product Name</label>
+                            <input type="text" class="form-control" id="product-name" placeholder="Xiaomi Redmi 5 Plus">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-category">Product Category</label>
+                            <select class="form-control" id="product-category"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-manufacturer">Product Manufacturer</label>
+                            <select class="form-control" id="product-manufacturer"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-series">Product Series</label>
+                            <select class="form-control" id="product-series"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-sdescription">Short Description</label>
+                            <textarea class="form-control" id="product-sdescription" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-description">Full Description</label>
+                            <textarea class="form-control" id="product-description" rows="4" cols="8"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-specification">Full Specification</label>
+                            <textarea class="form-control" id="product-specification" rows="4" cols="8"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-tags">Product Tags</label>
+                            <input type="text" class="form-control" id="product-tags" placeholder="smartphone, china, budget">
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <label for="product-price">Product Price</label>
+                            <input type="text" class="form-control" id="product-price" placeholder="$399.99">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-old-price">Product Previous Price</label>
+                            <input type="text" class="form-control" id="product-old-price" placeholder="$499.99">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-sku">Product SKU</label>
+                            <input class="form-control" id="product-sku" value="SKU-0001">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-quantity">Product Quantity</label>
+                            <input type="number" class="form-control" id="product-quantity" placeholder="10000" value="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-thumbnail">Product Thumbnail (URL)</label>
+                            <input type="text" class="form-control" id="product-thumbnail" placeholder="https://stock.com/3423">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const baseURL = window.location.origin;
+        const baseAPI = baseURL + '/api/admin';
+
+        const productName = document.getElementById('product-name');
+        const productCategory = document.getElementById('product-category');
+        const productManufacturer = document.getElementById('product-manufacturer');
+        const productSeries = document.getElementById('product-series');
+        const productShortDescription = document.getElementById('product-sdescription');
+        const productDescription = document.getElementById('product-description');
+        const productSpecification = document.getElementById('product-specification');
+        const productTags = document.getElementById('product-tags');
+        const productPrice = document.getElementById('product-price');
+        const productOldPrice = document.getElementById('product-old-price');
+        const productSKU = document.getElementById('product-sku');
+        const productQuantity = document.getElementById('product-quantity');
+        const productThumbnail = document.getElementById('product-thumbnail');
+
+        const init = () => {
+            fetchProductCategory();
+
+            const productManufacturerFetch = new XMLHttpRequest();
+            productManufacturerFetch.open('GET', baseAPI + '/manufacturer/get');
+            productManufacturerFetch.onload = () => {
+                const productManufacturerArray = JSON.parse(productManufacturerFetch.response);
+
+                for (const manufacturer of productManufacturerArray) {
+                    productManufacturer.innerHTML += `<option value="${manufacturer._id}">${manufacturer.name}</option>`;
+                }
+            };
+            productManufacturerFetch.send();
+
+            const productSeriesFetch = new XMLHttpRequest();
+            productSeriesFetch.open('GET', baseAPI + '/series/get');
+            productSeriesFetch.onload = () => {
+                const productSeriesArray = JSON.parse(productSeriesFetch.response);
+
+                for (const series of productSeriesArray) {
+                    productSeries.innerHTML += `<option value="${series._id}">${series.name}</option>`;
+                }
+            };
+            productSeriesFetch.send();
+        };
+
+        function fetchProductCategory() {
+            const HTTP = new XMLHttpRequest();
+            HTTP.open('GET', baseAPI + '/category/get');
+            HTTP.onload = () => {
+                const productCategoriesArray = JSON.parse(HTTP.response);
+
+                for (const category of productCategoriesArray) {
+                    productCategory.innerHTML += `<option value="${category._id}">${category.name}</option>`;
+                }
+            };
+            HTTP.send();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

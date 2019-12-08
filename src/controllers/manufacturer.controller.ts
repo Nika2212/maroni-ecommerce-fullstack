@@ -1,9 +1,7 @@
 import {BaseController} from "../core/base.controller";
 import {IBaseController} from "../core/IBase.controller";
 import {Request, Response} from "express";
-import {Category} from "../models/category.model";
 import {Manufacturer} from "../models/manufacturer.model";
-import {Series} from "../models/series.model";
 
 export class ManufacturerController extends BaseController implements IBaseController {
     public async get(req: Request, res: Response): Promise<Response | void> {

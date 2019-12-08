@@ -8,8 +8,6 @@ export class HomeController extends BaseController implements IBaseController {
     public async create(req: Request, res: Response): Promise<Response | void> {}
     public async update(req: Request, res: Response): Promise<Response | void> {}
     public async delete(req: Request, res: Response): Promise<Response | void> {}
-    public async append(req: Request, res: Response): Promise<Response | void> {}
-    public async search(req: Request, res: Response): Promise<Response | void> {}
 
     public getHomePage(req: Request, res: Response): Response | Promise<Response> | void {
         res.status(200).render('temp/seeder');
@@ -49,5 +47,9 @@ export class HomeController extends BaseController implements IBaseController {
     }
     public get404Page(req: Request, res: Response): Response | Promise<Response> | void {
         res.status(200).send('404 Page');
+    }
+
+    public getAdminProductPage(req: Request, res: Response): void {
+        return res.render('admin/product.html');
     }
 }
