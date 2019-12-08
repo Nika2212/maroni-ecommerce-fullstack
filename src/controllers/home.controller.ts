@@ -3,13 +3,13 @@ import { IBaseController } from "../core/IBase.controller";
 import { Request, Response } from 'express';
 
 export class HomeController extends BaseController implements IBaseController {
-    public index(req: Request, res: Response): Response | Promise<Response> | void {}
-    public create(req: Request, res: Response): Response | Promise<Response> | void {}
-    public update(req: Request, res: Response): Response | Promise<Response> | void {}
-    public show(req: Request, res: Response): Response | Promise<Response> | void {}
-    public store(req: Request, res: Response): Response | Promise<Response> | void {}
-    public edit(req: Request, res: Response): Response | Promise<Response> | void {}
-    public destroy(req: Request, res: Response): Response | Promise<Response> | void {}
+    public async get(req: Request, res: Response): Promise<Response | void> {}
+    public async getOne(req: Request, res: Response): Promise<Response | void> {}
+    public async create(req: Request, res: Response): Promise<Response | void> {}
+    public async update(req: Request, res: Response): Promise<Response | void> {}
+    public async delete(req: Request, res: Response): Promise<Response | void> {}
+    public async append(req: Request, res: Response): Promise<Response | void> {}
+    public async search(req: Request, res: Response): Promise<Response | void> {}
 
     public getHomePage(req: Request, res: Response): Response | Promise<Response> | void {
         res.status(200).render('temp/seeder');
@@ -49,9 +49,5 @@ export class HomeController extends BaseController implements IBaseController {
     }
     public get404Page(req: Request, res: Response): Response | Promise<Response> | void {
         res.status(200).send('404 Page');
-    }
-
-    public getAdminPage(req: Request, res: Response): Response | Promise<Response> | void {
-        res.status(200).render('admin/index')
     }
 }
