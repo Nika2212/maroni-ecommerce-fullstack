@@ -89,6 +89,13 @@
                             <label for="product-thumbnail">Product Thumbnail (URL)</label>
                             <input type="text" class="form-control" id="product-thumbnail" placeholder="https://stock.com/3423">
                         </div>
+
+                        <hr>
+
+                        <div class="form-action-group d-flex justify-content-end mb-5">
+                            <button type="button" class="btn btn-danger">Reset</button>
+                            <button type="button" class="btn btn-primary ml-1">Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -113,46 +120,7 @@
         const productQuantity = document.getElementById('product-quantity');
         const productThumbnail = document.getElementById('product-thumbnail');
 
-        const init = () => {
-            fetchProductCategory();
 
-            const productManufacturerFetch = new XMLHttpRequest();
-            productManufacturerFetch.open('GET', baseAPI + '/manufacturer/get');
-            productManufacturerFetch.onload = () => {
-                const productManufacturerArray = JSON.parse(productManufacturerFetch.response);
-
-                for (const manufacturer of productManufacturerArray) {
-                    productManufacturer.innerHTML += `<option value="${manufacturer._id}">${manufacturer.name}</option>`;
-                }
-            };
-            productManufacturerFetch.send();
-
-            const productSeriesFetch = new XMLHttpRequest();
-            productSeriesFetch.open('GET', baseAPI + '/series/get');
-            productSeriesFetch.onload = () => {
-                const productSeriesArray = JSON.parse(productSeriesFetch.response);
-
-                for (const series of productSeriesArray) {
-                    productSeries.innerHTML += `<option value="${series._id}">${series.name}</option>`;
-                }
-            };
-            productSeriesFetch.send();
-        };
-
-        function fetchProductCategory() {
-            const HTTP = new XMLHttpRequest();
-            HTTP.open('GET', baseAPI + '/category/get');
-            HTTP.onload = () => {
-                const productCategoriesArray = JSON.parse(HTTP.response);
-
-                for (const category of productCategoriesArray) {
-                    productCategory.innerHTML += `<option value="${category._id}">${category.name}</option>`;
-                }
-            };
-            HTTP.send();
-        }
-
-        window.onload = init;
     </script>
 </body>
 </html>
