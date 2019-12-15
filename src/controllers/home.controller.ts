@@ -52,4 +52,7 @@ export class HomeController extends BaseController implements IBaseController {
     public getAdminProductPage(req: Request, res: Response): void {
         return res.render('admin/product.html');
     }
+    public getAdminAssignPage(req: Request, res: Response): void {
+        return res.render('admin/assign.html');
+    }
 }

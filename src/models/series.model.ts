@@ -1,8 +1,9 @@
 import * as mongoose from 'mongoose';
 import { Document, Schema } from 'mongoose';
 import { Manufacturer } from './manufacturer.model';
+import { Category } from './category.model';
 
-const MongoCategorySchema = new mongoose.Schema({
+const MongoSeriesSchema = new mongoose.Schema({
     name: {
         type: String,
         min: 3,
@@ -29,47 +30,56 @@ const MongoCategorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    manufacturers_id: [{
+    category_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category'
+    },
+    manufacturer_id: {
         type: Schema.Types.ObjectId,
         ref: 'Manufacturer'
+    },
+    products_id: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
     }],
     timestamp: {
         type: Date,
         default: new Date().getTime()
     }
 });
-const CategorySchema = mongoose.model('Category', MongoCategorySchema);
+const SeriesSchema = mongoose.model('Series', MongoSeriesSchema);
 
-export class Category {
+export class Series {
     public _id?: string;
     public name: string;
     public slug: string;
     public content: string;
     public status: boolean;
     public trash?: boolean;
-    public manufacturers?: Manufacturer[];
+    public manufacturer?: Manufacturer;
+    public category?: Category;
     public timestamp?: string;
 
     static readList = async (): Promise<Document[]> => {
-        return CategorySchema.find({});
+        return SeriesSchema.find({});
     };
-    static create = async (category: Category): Promise<Document> => {
-        const newCategorySchema = new CategorySchema(category);
+    static create = async (series: Series): Promise<Document> => {
+        const newSeriesSchema = new SeriesSchema(series);
 
-        return await newCategorySchema.save();
+        return await newSeriesSchema.save();
     };
     static read = async (_id: string): Promise<Document> => {
-        return CategorySchema.findById(_id);
+        return SeriesSchema.findById(_id);
     };
-    static update = async (_id: string, category: Category): Promise<Document> => {
-        delete category._id;
-        delete category.trash;
-        delete category.timestamp;
+    static update = async (_id: string, series: Series): Promise<Document> => {
+        delete series._id;
+        delete series.trash;
+        delete series.timestamp;
 
-        return await CategorySchema.findByIdAndUpdate(_id, category).exec();
+        return await SeriesSchema.findByIdAndUpdate(_id, series).exec();
     };
     static delete = async (_id: string): Promise<Document> => {
-        return CategorySchema.findByIdAndRemove(_id);
+        return SeriesSchema.findByIdAndRemove(_id);
     };
 }
 
